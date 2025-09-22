@@ -38,10 +38,6 @@ const PatternBoth = [
 globalList = []
         
 
-for(let x=0; x<20; x++){
-    
-    console.log('<div class="result">', x, '</div>')
-}
 
 
 function updatePattern(incw,decw, incf,decf){
@@ -461,9 +457,9 @@ function pridict(){
 function lastProcess(){
     
     const current12Format = data_to_1_2(globalList.slice(0,3))
-    console.log('current12Format ', current12Format, globalList.slice(1,3))
+    //console.log('current12Format ', current12Format, globalList.slice(1,3))
     const data12Format = data_to_1_2(globalList)
-    console.log(data12Format)
+    //console.log(data12Format)
 
     
 
@@ -491,13 +487,7 @@ function lastProcess(){
 
    // console.log('findPatternInDate ', foundPatternIndexPosition)
 
-    foundPatternIndexPosition.forEach(x => {
-        
-        if(x != 0){
-            let d = globalList.slice(x, x+3)
-           // console.log('find index : ',x,'->',x+3,' = ', d, ' so befor that : ', globalList[x-1])
-        }
-    });
+    
 
 
     oddPatternPrivius()
