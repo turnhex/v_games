@@ -402,6 +402,10 @@ function pridict(){
         currentWpatterNew = winnNext.slice(0,2)
 
 
+    console.log("currentFpatterNew ", currentFpatterNew)
+
+    console.log("currentWpatterNew ", currentWpatterNew)
+    
     let nextF = []
     if(currentFpatterNew.length > 1){
         let groupF = []
@@ -475,7 +479,7 @@ function lastProcess(){
             if(search_pattrn.toString() === data_current_pattern.toString()){
                 foundPatternIndexPosition.push(x)
                 
-                console.log('compare ',x, search_pattrn.toString(), data_current_pattern.toString())
+                //console.log('compare ',x, search_pattrn.toString(), data_current_pattern.toString())
 
             }
         }
@@ -485,13 +489,13 @@ function lastProcess(){
 
     const foundPatternIndexPosition = findPatternInDate(current12Format, data12Format)
 
-    console.log('findPatternInDate ', foundPatternIndexPosition)
+   // console.log('findPatternInDate ', foundPatternIndexPosition)
 
     foundPatternIndexPosition.forEach(x => {
         
         if(x != 0){
             let d = globalList.slice(x, x+3)
-            console.log('find index : ',x,'->',x+3,' = ', d, ' so befor that : ', globalList[x-1])
+           // console.log('find index : ',x,'->',x+3,' = ', d, ' so befor that : ', globalList[x-1])
         }
     });
 
@@ -508,7 +512,7 @@ function getGlobalList(){
 
 
     let globalListHtml = document.getElementsByClassName("payout ng-star-inserted")
-    console.log('globalListHtml', globalListHtml)
+    //console.log('globalListHtml', globalListHtml)
 
     let tmpGlobalList = []
     for(let x=0; x<globalListHtml.length; x++){
