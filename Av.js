@@ -391,8 +391,8 @@ function pridict(){
 
     //html += winnPattern.toString()
 
-    let currentFpatterNew = failNext.slice(1,3)
-    let currentWpatterNew = winnNext.slice(1,3)
+    let currentFpatterNew = failNext.length ? failNext.slice(0,2) : []
+    let currentWpatterNew = winnNext.length ? winnNext.slice(0,2) : []
 
     let nextF = []
     if(currentFpatterNew.length > 1){
