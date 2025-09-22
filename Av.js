@@ -492,7 +492,7 @@ function lastProcess(){
 
     oddPatternPrivius()
     pridict()
-    oddHistoryTable()
+   
     
     Menu()
 
@@ -549,9 +549,9 @@ function getGlobalList(){
     lastProcess()
     Menu()
     
+
     
     return 0
-
 
 }
 
