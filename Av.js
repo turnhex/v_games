@@ -310,10 +310,6 @@ function pridict(){
     const faildPattern = WinnFaildPattern(globalList).faildPattern
     const winnPattern  = WinnFaildPattern(globalList).winnPattern
 
-    console.log("faildPattern ", faildPattern)
-    console.log("winnPattern ",  winnPattern)
-
-
     let currentFpatter = faildPattern.slice(1,3)
     let currentWpatter = winnPattern.slice(1,3)
 
@@ -333,7 +329,12 @@ function pridict(){
                             
             if(failPrivius.toString() === currentFpatter.toString()){
                 //console.log("Found At ", x, " ->  Next : ", faildPattern[x-2], " current P : ", faildPattern[x-1], faildPattern[x])
-                failNext.push(faildPattern[x-2])
+                try{
+                    faildPattern[x-2]
+                    failNext.push(faildPattern[x-2])
+                }catch(e){
+
+                }
             }
 
             failPrivius = []
@@ -356,7 +357,13 @@ function pridict(){
                             
             if(winnPrivius.toString() === currentWpatter.toString()){
                 //console.log("Found At ", x, " ->  Next : ", winnPattern[x-2], " current P : ", winnPattern[x-1], winnPattern[x])
-                winnNext.push(winnPattern[x-2])
+                try{
+                    winnPattern[x-2]
+                    winnNext.push(winnPattern[x-2])
+                }catch(e){
+                    
+                }
+
             }
 
 
@@ -374,45 +381,40 @@ function pridict(){
     if(failNext.length == 0)
         failNext = ["not Found"]
     
-    //
 
     
     document.getElementsByClassName("data-list ng-star-inserted")[0].innerHTML += '<div class="pridiction"> </div>'
     let tag = document.getElementsByClassName("pridiction")[0]
 
 
+    winStatus = globalList[0] > 1.99 ? '=> ' : ''
+    failStatus = globalList[0] < 2 ? '=> ' : ''
 
-    html = `<div style="font-size:15px">Pridict F : <span style="color:red">[`+faildPattern.slice(0,3).toString()+`]</span> : `+failNext.slice(0,13).toString()+'</div></br>'
-    html += `<div style="font-size:15px">Pridict W : <span style="color:green">[`+winnPattern.slice(0,3).toString()+`]</span> : `+winnNext.slice(0,13).toString()+'</div></br>'
+    html = `<div style="font-size:15px">`+failStatus+`Pridict F : <span style="color:red">[`+faildPattern.slice(0,3).toString()+`]</span> : `+failNext.slice(0,13).toString()+'</div></br>'
+    html += `<div style="font-size:15px">`+winStatus+`Pridict W : <span style="color:green">[`+winnPattern.slice(0,3).toString()+`]</span> : `+winnNext.slice(0,13).toString()+'</div></br>'
 
     //html += winnPattern.toString()
 
-    let currentFpatterNew = []
-    let currentWpatterNew = []
+    let currentFpatterNew = failNext.length ? failNext.slice(0,2) : []
+    let currentWpatterNew = winnNext.length ? winnNext.slice(0,2) : []
 
-
-    if(failNext.length  > 1)
-        currentFpatterNew = failNext.slice(0,2)
-
-    if(winnNext.length > 1)
-        currentWpatterNew = winnNext.slice(0,2)
-
-
-    console.log("currentFpatterNew ", currentFpatterNew)
-
-    console.log("currentWpatterNew ", currentWpatterNew)
-    
     let nextF = []
-    if(currentFpatterNew.length > 1){
+    if(failNext.length > 1){
         let groupF = []
        
         for(let x=0; x<failNext.length; x++){
             groupF.push(failNext[x])
 
-            if(failNext.length === 2){
+            if(groupF.length === 2){
 
                 if(currentFpatterNew.toString() === groupF.toString()){
-                    nextF.push(failNext[x-2])
+                    try{
+                        failNext[x-2]
+                        nextF.push(failNext[x-2])
+                    }catch(e){
+
+                    }
+                   
                 }
                 groupF = []
                 x--
@@ -422,16 +424,22 @@ function pridict(){
     }
 
     let nextW = []
-    if(currentWpatterNew.length > 1){
+    if(winnNext.length > 1){
         let groupW = []
        
         for(let x=0; x<winnNext.length; x++){
             groupW.push(winnNext[x])
 
-            if(winnNext.length === 2){
+            if(groupW.length === 2){
 
                 if(currentWpatterNew.toString() === groupW.toString()){
-                    nextW.push(winnNext[x-2])
+                    try{
+                        winnNext[x-2]
+                        nextW.push(winnNext[x-2])
+                    }catch(e){
+
+                    }
+
                 }
                 groupW = []
                 x--
@@ -450,8 +458,8 @@ function pridict(){
     tag.innerHTML = html
 
 
-
 }
+
 
 
 function lastProcess(){
@@ -492,8 +500,6 @@ function lastProcess(){
 
     oddPatternPrivius()
     pridict()
-   
-    
     Menu()
 
 }
@@ -547,10 +553,6 @@ function getGlobalList(){
 
 
     lastProcess()
-    Menu()
-    
-
-    
     return 0
 
 }
