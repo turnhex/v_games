@@ -20,8 +20,34 @@ document.getElementsByClassName("data-list ng-star-inserted")[0].innerHTML = '<d
 const setting = {
     'winnPatternSize':3,
     'faildPatternSize':3,
+    'opacity':0   
 }
 
+function display(mdoe = 0){
+
+    try{
+        document.getElementsByClassName("flex-none h-10 w-full bg-slate-200 text-slate-950 flex items-center justify-between p-2 gap-2")[0].style.opacity = 0
+    }catch(e){
+
+    }
+
+    if(mdoe == 0){
+        document.getElementsByTagName("body")[0].style.opacity = 1
+        document.getElementsByClassName("game-play")[0].style.opacity = 1
+        document.getElementsByClassName("main-header")[0].style.opacity = 1
+        document.getElementsByClassName("navigation-switcher-wrapper ng-untouched ng-valid ng-dirty")[0].style.opacity = 1
+    }else 
+    if(mdoe == 1){
+        document.getElementsByClassName("game-play")[0].style.opacity = 0
+        document.getElementsByClassName("main-header")[0].style.opacity = 0
+        document.getElementsByClassName("navigation-switcher-wrapper ng-untouched ng-valid ng-dirty")[0].style.opacity = 0
+    }else if(mdoe == 2){
+        document.getElementsByTagName("body")[0].style.opacity = 0
+
+    }
+    
+
+}
 
 const PatternWins = [
     [2,2,5]
@@ -129,23 +155,6 @@ function WinnFaildPattern(data){
 
 }
 
-function autoBet(){
-/*
-const PatternWins = [
-    [2,1,5]
-]
-
-const PatternFaild = [
-    [2,1,1]
-]
-
-const PatternBoth = [
-
-
-]
-*/
-
-}
 
 
 function customeRound(n){
@@ -161,7 +170,6 @@ function customeRound(n){
     return parseFloat(n_new_str)
 
 }
-
 
 
 
@@ -306,6 +314,51 @@ function oddPatternPrivius(){
     //console.log(WinnFaildPattern(globalList))
 }
 
+function autoBet(maxFaildExpected, currentFaild, maxWinnExpected, currentWinn){
+
+    let tag = document.getElementsByClassName("data-list ng-star-inserted")[0].getElementsByClassName("autobet")[0]
+    const balance = document.getElementsByTagName("app-header")[0].getElementsByClassName("amount")[0].innerText
+
+    tag.innerHTML = `
+            <center><b>Auto Bet Info</b></center>
+            <b>globalList : `+globalList.length.toString()+`</b><br> 
+            <b>Remain : `+balance+`</b>
+
+            <br>
+            <b>maxFaildExpected : `+maxFaildExpected+`/ `+currentFaild+`</b><br>
+            <b>maxWinnExpected : `+maxWinnExpected+`/ `+currentWinn+`</b>
+
+        `
+
+
+    let contraoler = document.getElementsByClassName("bet-controls")[0]
+
+    //navigate to auto 
+    document.getElementsByClassName("bet-controls")[0].getElementsByClassName("navigation-switcher")[0].getElementsByClassName("tab ng-star-inserted")[1].click()
+    try{
+        document.getElementsByClassName("bet-controls")[0].getElementsByClassName("cash-out-switcher")[0].getElementsByTagName("app-ui-switcher")[0].getElementsByClassName("input-switch off")[0].click()
+        
+    }catch(e){
+
+    }
+
+    const autoCashPoint = parseInt(document.getElementsByClassName("bet-controls")[0].getElementsByClassName("cashout-spinner-wrapper")[0].getElementsByTagName("input")[0].value)
+    
+    if(autoCashPoint == 2){
+        if(globalList[0] < 1.99 && maxFaildExpected > 1 && maxFaildExpected === currentFaild){
+
+            document.getElementsByClassName("bet-controls")[0].getElementsByClassName("buttons-block")[0].getElementsByTagName("button")[0].click()
+            tag.innerHTML += `<center><h5>Base Base On Faild Last Odd : `+globalList[0]+`</h5></center>`
+             
+        }
+
+        if(globalList[0] > 1.99 && maxWinnExpected > 2 && maxWinnExpected > currentWinn){
+
+            document.getElementsByClassName("bet-controls")[0].getElementsByClassName("buttons-block")[0].getElementsByTagName("button")[0].click()
+           tag.innerHTML += `<center><h5>Base Base On Winn Last Odd : `+globalList[0]+`</h5></center>`
+        }
+    }
+}
 
 function pridict(){
 
@@ -384,7 +437,7 @@ function pridict(){
     
 
     
-    document.getElementsByClassName("data-list ng-star-inserted")[0].innerHTML += '<div class="pridiction"> </div>'
+    document.getElementsByClassName("data-list ng-star-inserted")[0].innerHTML += '<div class="pridiction"> </div><div class="autobet"></div>'
     let tag = document.getElementsByClassName("pridiction")[0]
 
 
@@ -466,6 +519,9 @@ function pridict(){
 
 
     tag.innerHTML = html
+
+
+    autoBet(nextF[1], faildPattern[0], nextW[1], winnPattern[0])
 
 
 }
