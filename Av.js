@@ -375,11 +375,10 @@ function pridict(){
     console.log("winnNext Next : ", winnNext)
     
 
-
     if(winnNext.length == 0)
-        winnNext = ["not Found"]
+        winnNext = ["Not Found"]
     if(failNext.length == 0)
-        failNext = ["not Found"]
+        failNext = ["Not Found"]
     
 
     
@@ -390,13 +389,22 @@ function pridict(){
     winStatus = globalList[0] > 1.99 ? '=> ' : ''
     failStatus = globalList[0] < 2 ? '=> ' : ''
 
-    html = `<div style="font-size:15px">`+failStatus+`Pridict F : <span style="color:red">[`+faildPattern.slice(0,3).toString()+`]</span> : `+failNext.slice(0,13).toString()+'</div></br>'
+    html = `<div style="font-size:15px">`+failStatus+`Pridict F : <span style="color:red">[`+faildPattern.slice(0,3).toString()+`]</span> : `+failNext.slice(0,13).toString()+'</div>'
     html += `<div style="font-size:15px">`+winStatus+`Pridict W : <span style="color:green">[`+winnPattern.slice(0,3).toString()+`]</span> : `+winnNext.slice(0,13).toString()+'</div></br>'
 
     //html += winnPattern.toString()
 
     let currentFpatterNew = failNext.length ? failNext.slice(0,2) : []
     let currentWpatterNew = winnNext.length ? winnNext.slice(0,2) : []
+
+    html += `
+            <div>
+                `+failStatus+`currentFpatterNew = `+currentFpatterNew+`<br>
+                `+winStatus+`currentWpatterNew = `+currentWpatterNew+`<br>
+            </div>
+
+            `
+
 
     let nextF = []
     if(failNext.length > 1){
@@ -450,7 +458,7 @@ function pridict(){
 
 
 
-    html += `<div>Next F : <b style="color:red">`+nextF.toString()+`</b></div>`
+    html += `<br><div>Next F : <b style="color:red">`+nextF.toString()+`</b></div>`
 
     html += `<div>Next W : <b style="color:green">`+nextW.toString()+`</b></div>`
 
