@@ -10,6 +10,8 @@ if (el) {
     console.log('Attribute changed to _ngcontent-rni-c200');
 }
 
+
+
 document.getElementsByClassName("data-list ng-star-inserted")[0].innerHTML = '<div class="gameInformation"> </div>'
 
 
@@ -471,14 +473,10 @@ function pridict(){
 
 
 function lastProcess(){
-    
+
     const current12Format = data_to_1_2(globalList.slice(0,3))
-    //console.log('current12Format ', current12Format, globalList.slice(1,3))
     const data12Format = data_to_1_2(globalList)
-    //console.log(data12Format)
-
-    
-
+   
 
     function findPatternInDate(search_pattrn , data){
 
@@ -502,9 +500,6 @@ function lastProcess(){
     const foundPatternIndexPosition = findPatternInDate(current12Format, data12Format)
 
    // console.log('findPatternInDate ', foundPatternIndexPosition)
-
-    
-
 
     oddPatternPrivius()
     pridict()
@@ -558,6 +553,7 @@ function getGlobalList(){
         globalList.push(...backupGlobalList)
         console.log("update globalList : ", globalList)
     }
+
 
 
     lastProcess()
