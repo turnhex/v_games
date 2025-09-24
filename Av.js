@@ -54,7 +54,9 @@ const PatternWins = [
 ]
 
 const PatternFaild = [
-    [2,1,1]
+    [2,1,1],
+    [2,1,3,  2,2],
+    [3,2,1]
 ]
 
 const PatternBoth = [
@@ -352,7 +354,7 @@ function autoBet(maxFaildExpected, currentFaild, maxWinnExpected, currentWinn){
              
         }
 
-        if(globalList[0] > 1.99 && maxWinnExpected > 2 && maxWinnExpected > currentWinn){
+        if(globalList[0] > 1.99 && maxWinnExpected > 2 && maxWinnExpected-1 > currentWinn){
 
             document.getElementsByClassName("bet-controls")[0].getElementsByClassName("buttons-block")[0].getElementsByTagName("button")[0].click()
            tag.innerHTML += `<center><h5>Base Base On Winn Last Odd : `+globalList[0]+`</h5></center>`
