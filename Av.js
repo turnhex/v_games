@@ -347,7 +347,7 @@ function autoBet(maxFaildExpected, currentFaild, maxWinnExpected, currentWinn){
     const autoCashPoint = parseInt(document.getElementsByClassName("bet-controls")[0].getElementsByClassName("cashout-spinner-wrapper")[0].getElementsByTagName("input")[0].value)
     
     if(autoCashPoint == 2){
-        if(globalList[0] < 1.99 && maxFaildExpected > 1 && maxFaildExpected === currentFaild){
+        if(globalList[0] < 1.99 && maxFaildExpected > 1 && maxFaildExpected+1 === currentFaild){
 
             document.getElementsByClassName("bet-controls")[0].getElementsByClassName("buttons-block")[0].getElementsByTagName("button")[0].click()
             tag.innerHTML += `<center><h5>Base Base On Faild Last Odd : `+globalList[0]+`</h5></center>`
